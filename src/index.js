@@ -1,7 +1,8 @@
 import { todoApp } from "./todoApp.js";
 import { SideBarView } from "./views/sideBarView.js";
+import { SideBarPresenter } from "./presenters/sideBarPresenter.js";
 
-window.todoApp = todoApp;
-todoApp.addProject("fake");
-todoApp.addProject("ass");
-SideBarView().render(todoApp.getProjects());
+todoApp.addProject("Home");
+todoApp.addProject("Work");
+
+SideBarPresenter(todoApp, SideBarView(), (key) => console.log("selected", key));
