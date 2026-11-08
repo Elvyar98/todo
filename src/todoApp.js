@@ -1,4 +1,4 @@
-import { Project } from "./projectModel.js";
+import { Project } from "./models/projectModel.js";
 
 const todoApp = (() => {
   const projects = [];
