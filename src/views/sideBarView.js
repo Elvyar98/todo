@@ -2,6 +2,21 @@ export function SideBarView() {
   const permNavBar = document.getElementById("permanent");
   const tempNavBar = document.getElementById("temporary");
 
+  function bindSelect(handler) {
+    permNavBar.addEventListener("click", (e) => {
+      const button = e.target.closest("button");
+      if (button) {
+        handler(button.dataset.key);
+      }
+    });
+
+    tempNavBar.addEventListener("click", (e) => {
+      const button = e.target.closest("button");
+      if (button) {
+        handler(button.dataset.key);
+      }
+    });
+  }
   function render(projects) {
     tempNavBar.replaceChildren();
     permNavBar.replaceChildren();
@@ -52,5 +67,5 @@ export function SideBarView() {
     }
   }
 
-  return { render };
+  return { render, bindSelect };
 }
