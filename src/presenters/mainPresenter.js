@@ -10,7 +10,7 @@ export function MainPresenter(todoApp, view) {
     else if (key === "overdue") todos = todoApp.getOverdue();
     else todos = todoApp.getProject(key).todos;
 
-    console.log(todos);
+    view.render(todos);
   }
 
   return { showView };
