@@ -2,21 +2,32 @@ export function SideBarView() {
   const permNavBar = document.getElementById("permanent");
   const tempNavBar = document.getElementById("temporary");
 
+  function bindDelete(handler) {
+    tempNavBar.addEventListener("click", (e) => {
+      const button = e.target.closest(".project-delete");
+      if (button) {
+        e.stopImmediatePropagation();
+        handler(button.dataset.key);
+      }
+    });
+  }
+
   function bindSelect(handler) {
     permNavBar.addEventListener("click", (e) => {
-      const button = e.target.closest("button");
+      const button = e.target.closest(".project-button");
       if (button) {
         handler(button.dataset.key);
       }
     });
 
     tempNavBar.addEventListener("click", (e) => {
-      const button = e.target.closest("button");
+      const button = e.target.closest(".project-button");
       if (button) {
         handler(button.dataset.key);
       }
     });
   }
+
   function render(projects) {
     tempNavBar.replaceChildren();
     permNavBar.replaceChildren();
@@ -50,7 +61,6 @@ export function SideBarView() {
       for (const project of projects) {
         const btn = document.createElement("button");
         btn.classList.add("project-button");
-        btn.setAttribute("data-key", project.id);
 
         const name = document.createElement("div");
 
@@ -58,6 +68,8 @@ export function SideBarView() {
 
         const xMark = document.createElement("div");
         xMark.classList.add("project-delete");
+        xMark.setAttribute("data-key", project.id);
+
         xMark.textContent = "X";
 
         btn.appendChild(name);
@@ -67,5 +79,5 @@ export function SideBarView() {
     }
   }
 
-  return { render, bindSelect };
+  return { render, bindSelect, bindDelete };
 }

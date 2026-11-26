@@ -13,5 +13,10 @@ export function MainPresenter(todoApp, view) {
     view.render(todos);
   }
 
-  return { showView };
+  function handleDelete(todoID, projectID) {
+    todoApp.deleteTodo(todoID, projectID);
+    showView(currentKey);
+  }
+  view.bindDelete(handleDelete);
+  return { showView, handleDelete };
 }
